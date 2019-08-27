@@ -1,5 +1,11 @@
 const inquirer = require('inquirer')
-var grid = [[false,false,false], [false,false,false],[ false,false,false]];
+var grid = [
+    [false,false,false,false,false], 
+    [false,false,false,false,false],
+    [false,false,false,false,false],
+    [false,false,false,false,false],
+    [false,false,false,false,false]
+];
 var direction = 'north';
 
 var questions = [{
@@ -47,9 +53,9 @@ function askQuestion() {
         } else if(answers['option'].toLowerCase() == 'place') {
             inquirer.prompt(options).then(answers => { 
                 var coordinates = [answers.place.charAt(0), answers.place.charAt(2)];
-                if(coordinates[0] > 2 || coordinates[0] < 0) {
+                if(coordinates[0] > 4 || coordinates[0] < 0) {
                     console.log("Those are invalid coordinates");
-                } else if(coordinates[1] > 2 || coordinates[1] < 0) {
+                } else if(coordinates[1] > 4 || coordinates[1] < 0) {
                     console.log("Those are invalid coordinates");
                 } else {
                     setInitialLocation(coordinates[0], coordinates[1])
@@ -81,15 +87,15 @@ function move() {
             setLocation(location[0], location[1], 'north')
         }    
     } else if(direction == 'south') {
-        if(location[0] == 2) {
+        if(location[0] == 4) {
             console.log("You can't move in that direction");
-        } else if(location[0] < 2) {
+        } else if(location[0] < 4) {
             setLocation(location[0], location[1], 'south')
         }  
     } else if(direction == 'east') {
-        if(location[1] == 2) {
+        if(location[1] == 4) {
             console.log("You can't move in that direction");
-        } else if(location[1] < 2) {
+        } else if(location[1] < 4) {
             setLocation(location[0], location[1], 'east')
         }  
     } else if(direction == 'west') {
